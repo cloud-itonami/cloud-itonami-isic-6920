@@ -1,4 +1,4 @@
-# cloud-itonami-6920
+# cloud-itonami-isic-6920
 
 Open Business Blueprint for **ISIC Rev.5 6920**: Accounting, bookkeeping and auditing activities.
 

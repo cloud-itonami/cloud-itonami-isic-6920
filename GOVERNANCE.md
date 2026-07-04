@@ -1,6 +1,6 @@
 # Governance
 
-`cloud-itonami-6920` is an OSS open-business blueprint for accounting, bookkeeping and auditing services, including tax-return preparation, for client businesses and individuals.
+`cloud-itonami-isic-6920` is an OSS open-business blueprint for accounting, bookkeeping and auditing services, including tax-return preparation, for client businesses and individuals.
 Governance covers both the capability layer and the operator model.
 
 ## Maintainers

@@ -2,7 +2,7 @@
 
 ## Classification
 
-- Repository: `cloud-itonami-6920`
+- Repository: `cloud-itonami-isic-6920`
 - ISIC Rev.5: `6920`
 - Activity: accounting, bookkeeping and auditing services, including tax-return preparation, for client businesses and individuals
 - Social impact: professional standards, data sovereignty, transparent audit

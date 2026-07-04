@@ -1,4 +1,4 @@
-{:itonami.blueprint/id "cloud-itonami-6920"
+{:itonami.blueprint/id "cloud-itonami-isic-6920"
  :itonami.blueprint/name "Accounting, bookkeeping and auditing activities"
  :itonami.blueprint/isic-rev5 "6920"
  :itonami.blueprint/domain :professional/accounting
