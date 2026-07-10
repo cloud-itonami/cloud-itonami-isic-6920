@@ -155,11 +155,12 @@ lib to reference at all.
 | `src/accounting/registry.cljc` | Audit-opinion + tax-filing draft records, plus `trial-balance-difference` (a real, foundational bookkeeping identity -- see docstring for what it does not model) |
 | `src/accounting/facts.cljc` | Per-jurisdiction professional-standards/independence catalog with an official spec-basis citation per entry, honest coverage reporting |
 | `src/accounting/ledgerllm.cljc` | **Ledger-LLM Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/independence-screening/opinion-issuance/filing-submission proposals |
+| `src/accounting/corporate_intel.cljc` | optional cross-reference into [`cloud-itonami-isic-8291`](https://github.com/cloud-itonami/cloud-itonami-isic-8291)'s `:disclosure/query` company-profile lookup (ADR-2607110400) -- catches a client ENGAGEMENT'S COMPANY clean on the local `:independence-conflict?` field but sanctions-flagged in 8291's own sourced data; wired into `screen-independence` via an injected fn, default is a no-op so every prior caller's behavior is unchanged unless explicitly opted in |
 | `src/accounting/governor.cljc` | **Audit Independence Governor** -- 5 HARD checks (spec-basis · evidence-incomplete · wrong-engagement-type · independence-violation, unconditional evaluation · trial-balance-out-of-balance, pure ground-truth recompute) + double-issuance/double-filing guards + 1 soft (confidence/actuation gate) |
 | `src/accounting/phase.cljc` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (opinion/filing always human; engagement intake is the ONLY auto-eligible op, no capital risk) |
 | `src/accounting/operation.cljc` | **OperationActor** -- langgraph-clj StateGraph |
 | `src/accounting/sim.cljc` | demo driver |
-| `test/accounting/*_test.clj` | governor contract · phase invariants · store parity · registry conformance · facts coverage |
+| `test/accounting/*_test.clj` | governor contract · phase invariants · store parity · registry conformance · facts coverage · corporate-intelligence integration |
 
 ## Business-process coverage (honest)
 

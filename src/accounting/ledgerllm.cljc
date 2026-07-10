@@ -76,12 +76,29 @@
        :stake      nil
        :confidence 0.9})))
 
+(def default-corporate-intel-screen
+  "No-op corporate-intelligence cross-reference: always 'nothing on
+  file' (empty flags). This is the default so every existing caller of
+  `screen-independence`/`infer`/`mock-advisor` keeps its exact prior
+  behavior unless it explicitly wires in `accounting.corporate-intel/
+  screen-company` (or an equivalent). Not required from this namespace
+  directly -- keeping the dependency optional at the ledgerllm level,
+  injected only by whoever builds the advisor."
+  (constantly {:flags {}}))
+
 (defn- screen-independence
   "Independence screening draft. `:independence-conflict?` on the
   engagement record injects the failure mode: the Audit Independence
   Governor must HOLD, un-overridably, on any independence-conflict
-  hit."
-  [db {:keys [subject]}]
+  hit.
+
+  `screen-fn` (client company name -> corporate-intel result, see
+  `accounting.corporate-intel/screen-company`) is consulted ONLY once
+  the local `:independence-conflict?` check is otherwise clean -- it
+  can turn a would-be :clear into :conflict or :incomplete, but a local
+  independence conflict is decided first, cheaply, without depending
+  on an external actor at all."
+  [db {:keys [subject]} screen-fn]
   (let [e (store/engagement db subject)]
     (cond
       (nil? e)
@@ -99,13 +116,43 @@
        :confidence 0.95}
 
       :else
-      {:summary    (str (:client e) ": 独立性阻害要因なし")
-       :rationale  "独立性スクリーニング非該当。"
-       :cites      [:independence-check]
-       :effect     :independence/set
-       :value      {:engagement-id subject :verdict :clear}
-       :stake      nil
-       :confidence 0.9})))
+      (let [ci (screen-fn (:client e))]
+        (cond
+          (:pending-human-review? ci)
+          {:summary    (str (:client e) ": corporate-intelligence 照会が人手レビュー待ち")
+           :rationale  "cloud-itonami-isic-8291 側の DisclosureGovernor が high-stakes escalate 中。確定するまでクリアにできない。"
+           :cites      [:independence-check :corporate-intelligence]
+           :effect     :independence/set
+           :value      {:engagement-id subject :verdict :incomplete}
+           :stake      nil
+           :confidence 0.5}
+
+          (:held? ci)
+          {:summary    (str (:client e) ": corporate-intelligence 照会が拒否された(契約/設定の問題)")
+           :rationale  (str "cloud-itonami-isic-8291 の DisclosureGovernor が本テナントの照会を拒否: " (pr-str (:reason ci)))
+           :cites      [:independence-check :corporate-intelligence]
+           :effect     :independence/set
+           :value      {:engagement-id subject :verdict :incomplete}
+           :stake      nil
+           :confidence 0.4}
+
+          (get-in ci [:flags :sanctions?])
+          {:summary    (str (:client e) ": corporate-intelligence 照会でクライアント企業の制裁フラグを検出")
+           :rationale  "cloud-itonami-isic-8291 の企業プロファイル照会がクライアント企業自身の制裁フラグを検出。未開示の独立性阻害要因として扱い、人手確認とホールドが必須。"
+           :cites      [:independence-check :corporate-intelligence]
+           :effect     :independence/set
+           :value      {:engagement-id subject :verdict :conflict}
+           :stake      nil
+           :confidence 0.9}
+
+          :else
+          {:summary    (str (:client e) ": 独立性阻害要因なし")
+           :rationale  "独立性スクリーニング非該当(ローカル + corporate-intelligence 照会クリアまたは未収載)。"
+           :cites      [:independence-check :corporate-intelligence]
+           :effect     :independence/set
+           :value      {:engagement-id subject :verdict :clear}
+           :stake      nil
+           :confidence 0.9})))))
 
 (defn- propose-audit-opinion
   "Draft the actual audit-OPINION-issuance action -- issuing a real
@@ -159,16 +206,20 @@
 
 (defn infer
   "Route a request to the right proposal generator.
-  request: {:op kw :subject id ...op-specific...}"
-  [db {:keys [op] :as request}]
-  (case op
-    :engagement/intake       (normalize-intake db request)
-    :jurisdiction/assess       (assess-jurisdiction db request)
-    :independence/screen        (screen-independence db request)
-    :audit-opinion/issue          (propose-audit-opinion db request)
-    :tax-filing/submit              (propose-tax-filing db request)
-    {:summary "未対応の操作" :rationale (str op) :cites []
-     :effect :noop :stake nil :confidence 0.0}))
+  request: {:op kw :subject id ...op-specific...}
+  `screen-fn` (default: `default-corporate-intel-screen`, a no-op) is
+  only consulted by `:independence/screen`, once the local
+  `:independence-conflict?` check is otherwise clean."
+  ([db request] (infer db request default-corporate-intel-screen))
+  ([db {:keys [op] :as request} screen-fn]
+   (case op
+     :engagement/intake       (normalize-intake db request)
+     :jurisdiction/assess       (assess-jurisdiction db request)
+     :independence/screen        (screen-independence db request screen-fn)
+     :audit-opinion/issue          (propose-audit-opinion db request)
+     :tax-filing/submit              (propose-tax-filing db request)
+     {:summary "未対応の操作" :rationale (str op) :cites []
+      :effect :noop :stake nil :confidence 0.0})))
 
 ;; ----------------------------- Advisor protocol -----------------------------
 
@@ -176,8 +227,17 @@
   (-advise [advisor store request] "store + request -> proposal map"))
 
 (defn mock-advisor
-  "The deterministic advisor (the `infer` logic above). Default everywhere."
-  [] (reify Advisor (-advise [_ st req] (infer st req))))
+  "The deterministic advisor (the `infer` logic above). Default everywhere.
+  opts:
+    :corporate-intel-screen -- client company name -> corporate-intel
+      result (see `accounting.corporate-intel/screen-company`). Default:
+      no-op (never changes a screen-independence verdict), so
+      `(mock-advisor)` with no args keeps every existing caller's exact
+      prior behavior."
+  ([] (mock-advisor {}))
+  ([{:keys [corporate-intel-screen]
+     :or   {corporate-intel-screen default-corporate-intel-screen}}]
+   (reify Advisor (-advise [_ st req] (infer st req corporate-intel-screen)))))
 
 (def ^:private system-prompt
   (str "あなたは会計・監査事務所の意見発行・申告書提出エージェントの助言者です。"

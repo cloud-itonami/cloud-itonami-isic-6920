@@ -78,7 +78,19 @@
                      :jurisdiction "JPN" :status :active}
     "engagement-6" {:id "engagement-6" :client "高橋物産" :engagement-type :tax-filing
                      :independence-conflict? false
-                     :jurisdiction "JPN" :status :active}}})
+                     :jurisdiction "JPN" :status :active}
+    ;; engagement-7's client is deliberately "Northwind Capital Holdings
+    ;; Ltd (demo)" -- byte-exact the SAME company as cloud-itonami-isic-
+    ;; 8291's own sanctions-flagged demo company `co-200` (see 8291's
+    ;; `dossier.store/demo-data`). LOCALLY this engagement looks entirely
+    ;; clean (`:independence-conflict? false`, balanced trial balance) --
+    ;; it exists purely to prove that `accounting.corporate-intel`'s
+    ;; cross-reference into 8291 catches a flagged client that this
+    ;; actor's own local-only independence check would silently miss.
+    "engagement-7" {:id "engagement-7" :client "Northwind Capital Holdings Ltd (demo)"
+                     :engagement-type :audit
+                     :independence-conflict? false :assets 8000000 :liabilities 5000000 :equity 3000000
+                     :jurisdiction "GBR" :status :active}}})
 
 ;; ----------------------------- shared commit logic -----------------------------
 

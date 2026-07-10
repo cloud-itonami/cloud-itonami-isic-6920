@@ -20,7 +20,8 @@
       (is (= :tax-filing (:engagement-type (store/engagement s "engagement-4"))))
       (is (false? (:independence-conflict? (store/engagement s "engagement-1"))))
       (is (true? (:independence-conflict? (store/engagement s "engagement-5"))))
-      (is (= ["engagement-1" "engagement-2" "engagement-3" "engagement-4" "engagement-5" "engagement-6"]
+      (is (= ["engagement-1" "engagement-2" "engagement-3" "engagement-4" "engagement-5" "engagement-6"
+              "engagement-7"]
              (mapv :id (store/all-engagements s))))
       (is (nil? (store/independence-of s "engagement-1")))
       (is (nil? (store/assessment-of s "engagement-1")))
