@@ -6,7 +6,7 @@
  :itonami.blueprint/social-impact [:professional-standards :data-sovereignty :transparency]
  :itonami.blueprint/governor :audit-independence-governor
  :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger]
- :itonami.blueprint/optional-technologies []
+ :itonami.blueprint/optional-technologies [:corporate-intelligence]
  :itonami.blueprint/status :public-oss
  :itonami.blueprint/robotics true
  :itonami.blueprint/maturity :implemented}
