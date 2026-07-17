@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accounting, bookkeeping and auditing activities | cloud-itonami-isic-6920</title>
-  <meta name="description" content="Accounting, bookkeeping and auditing activities — governed open occupation blueprint (ISIC 6920).">
+  <meta name="description" content="Ledger-LLM ⊣ Audit Independence Governor. Governed accounting practice automation for ISIC 6920.">
   <style>
     :root { --bg:#f5f7fa; --card:#fff; --fg:#1b1f24; --muted:#57606a; --accent:#1e3a8a; --line:#d0d7de; }
     @media (prefers-color-scheme: dark) {
@@ -15,49 +15,73 @@
            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; color: var(--fg); }
     .container { max-width: 800px; width: 100%; background: var(--card); border-radius: 12px;
                  box-shadow: 0 10px 40px rgba(0,0,0,.1); padding: 48px 40px; border: 1px solid var(--line); }
-    h1 { font-size: 1.85rem; color: var(--accent); margin-bottom: 8px; }
+    h1 { font-size: 2rem; color: var(--accent); margin-bottom: 8px; line-height: 1.2; }
     .badge { display: inline-block; background: #e0e7ff; color: var(--accent); padding: 3px 10px;
              border-radius: 4px; font-size: .85rem; font-weight: 600; margin-bottom: 20px; }
     @media (prefers-color-scheme: dark) { .badge { background: #1f2a44; } }
-    .pitch { border-left: 4px solid var(--accent); padding-left: 16px; margin: 20px 0 28px; color: var(--muted); line-height: 1.7; }
-    .pitch p { margin-bottom: 10px; }
-    .meta { font-size: .9rem; color: var(--muted); margin-bottom: 24px; }
+    .problem { border-left: 4px solid var(--accent); padding-left: 16px; margin: 24px 0; line-height: 1.7; }
+    .problem h2 { font-size: 1rem; color: var(--fg); margin-bottom: 8px; font-weight: 600; }
+    .problem p { color: var(--muted); margin-bottom: 0; }
+    .differentiator { border-left: 4px solid var(--accent); padding-left: 16px; margin: 24px 0; line-height: 1.7; }
+    .differentiator h2 { font-size: 1rem; color: var(--fg); margin-bottom: 8px; font-weight: 600; }
+    .differentiator p { color: var(--muted); margin-bottom: 0; }
+    .not { border-left: 4px solid var(--accent); padding-left: 16px; margin: 24px 0; line-height: 1.7; }
+    .not h2 { font-size: 1rem; color: var(--fg); margin-bottom: 8px; font-weight: 600; }
+    .not p { color: var(--muted); margin-bottom: 0; }
+    .meta { font-size: .9rem; color: var(--muted); margin: 24px 0; }
     .meta code { background: var(--bg); padding: 1px 6px; border-radius: 4px; }
-    .cta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    .cta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
     @media (max-width: 560px) { .cta { grid-template-columns: 1fr; } }
     .cta a { display: block; text-align: center; text-decoration: none; padding: 14px 18px;
-             border-radius: 8px; font-weight: 600; }
+             border-radius: 8px; font-weight: 600; transition: all 0.2s; }
     .cta .primary { background: var(--accent); color: #fff; }
+    .cta .primary:hover { opacity: 0.9; }
     .cta .secondary { border: 1.5px solid var(--accent); color: var(--accent); }
-    ul.links { list-style: none; font-size: .95rem; }
+    .cta .secondary:hover { background: var(--bg); }
+    ul.links { list-style: none; font-size: .95rem; margin-top: 24px; }
     ul.links li { margin: 8px 0; }
-    a { color: var(--accent); }
-    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line);
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line);
              font-size: .85rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <main class="container">
-    <h1>Accounting, bookkeeping and auditing activities</h1>
+    <h1>Ledger-LLM ⊣ Audit Independence Governor</h1>
     <div class="badge">ISIC 6920 · maturity implemented</div>
-    <div class="pitch">
-      <p>Open Business Blueprint for ISIC Rev.5 6920: Accounting, bookkeeping and auditing activities. This repository publishes an accounting/auditing-practice actor -- client-engagement intake, independence screening, audit-opinion issuance and tax-filing submission -- as an OSS business that any qualified, licensed accounting/audit practice can fork, deploy, run, improve and sell.</p>
-      <p>Built on this workspace's [langgraph-clj](https://github.com/com-junkawasaki/langgraph-clj) StateGraph runtime (portable .cljc, supervised superstep loop, interrupts, Datomic/in-mem checkpoints) -- the same actor pattern as every prior actor in this fleet ([cloud-itonami-isic-6511](https://github.com/cloud-itonami/cloud-itonami-isic-6511), [6512](https://github.com/cloud-itonami/cloud-itonami-isic-6512), [6621](https://github.com/cloud-itonami/cloud-itonami-isic-6621), [6622](https://github.com/cloud-itonami/cloud-itonami-isic-6622), [6629](https://github.com/cloud-itonami/cloud-itonami-isic-6629), [6520](https://github.com/cloud-itonami/cloud-itonami-isic-6520), [6530](https://github.com/cloud-itonami/cloud-itonami-isic-6530), [6820](https://github.com/cloud-itonami/cloud-itonami-isic-6820), [6612](https://github.com/cloud-itonami/cloud-itonami-isic-6612), [6492](https://github.com/cloud-itonami/cloud-itonami-isic-6492)) -- the first professional-services vertical (ISIC division 69) in this fleet. Here it is Ledger-LLM ⊣ Audit Independence Governor.</p>
-      <p>&gt; Why an actor layer at all? An LLM is great at drafting an &gt; engagement summary, normalizing intake, and checking whether a &gt; trial balance actually balances -- but it has no notion of which &gt; jurisdiction's professional-standards/independence requirements are &gt; official, no license to issue a real audit opinion or submit a real &gt; tax filing, and no way to know on its own whether an engagement &gt; carries an undisclosed auditor-independence conflict. Letting it &gt; issue an opinion or submit a filing directly invites fabricated &gt; jurisdiction citations, undisclosed independence conflicts, and &gt; silently-wrong bookkeeping a third party would actually rely on -- &gt; and liability for whoever runs it. This project seals the Ledger-LLM &gt; into a single node and wraps it with an independent Audit &gt; Independence Governor, a human approval workflow, and an &gt; immutable audit ledger.</p>
+
+    <div class="problem">
+      <h2>The problem</h2>
+      <p>LLMs excel at drafting engagement summaries and normalizing intake, but they have no notion of which jurisdiction's professional-standards or independence requirements are official, no authority to issue real audit opinions or submit real tax filings, and no way to know whether an engagement carries undisclosed conflicts. Letting one issue an opinion directly invites fabricated citations, undisclosed conflicts, and wrong bookkeeping—and liability.</p>
     </div>
+
+    <div class="differentiator">
+      <h2>What you get</h2>
+      <p>An independent <strong>Audit Independence Governor</strong> that holds unsafe commits—not LLM magic, but governed execution. The Governor wraps a sealed Ledger-LLM, enforces spec-cited professional standards, screens independence, and gates opinion issuance and tax filing (always human-approved). Immutable audit ledger records every decision.</p>
+    </div>
+
+    <div class="not">
+      <h2>What this is not</h2>
+      <p>Not a hosted SaaS, not autonomous (opinion issuance and tax filing are never automatic), not a license to practice accounting in any jurisdiction (you supply that), and not a full materiality assessment. You supply jurisdiction-specific expertise and liability; this supplies the governed scaffold.</p>
+    </div>
+
     <p class="meta">Domain <code>professional/accounting</code> · Governor <code>audit-independence-governor</code> · License <code>AGPL-3.0-or-later</code></p>
+
     <div class="cta">
-      <a class="primary" href="https://itonami.cloud/isco-1212/">Fork + self-host claim</a>
-      <a class="secondary" href="https://itonami.cloud/docs/go-live.md">Paid go-live path</a>
+      <a class="primary" href="https://itonami.cloud/isco-1212/">Claim free tenant</a>
+      <a class="secondary" href="https://itonami.cloud/docs/go-live.md">Go-live path</a>
     </div>
+
     <ul class="links">
       <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-6920">GitHub repository</a></li>
       <li><a href="./operator-quickstart.md">Operator quickstart</a></li>
       <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-6920/blob/main/blueprint.edn">blueprint.edn</a></li>
-      <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-6920/blob/main/README.md">README</a></li>
+      <li><a href="https://github.com/cloud-itonami/cloud-itonami-isic-6920/blob/main/README.md">Full README</a></li>
     </ul>
+
     <footer>
-      <p>Open occupation blueprint — no invented usage or revenue metrics. Product face generated for impl-product maturity (Lane C).</p>
+      <p>Open business blueprint. No invented users, revenue, or metrics. For licensed accounting/audit practices only.</p>
     </footer>
   </main>
 </body>

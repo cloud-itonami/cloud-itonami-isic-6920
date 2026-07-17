@@ -2,6 +2,14 @@
 
 Shortest path from clone to a verified local dry-run for **ISIC 6920** (`cloud-itonami-isic-6920`).
 
+## Who this is for
+
+Licensed accounting or audit practices (CPAs, CAs, auditors) who want to:
+- Fork this blueprint as the compliance scaffold for your practice
+- Deploy it yourself under your own license and professional judgment
+- Operate it on your own infrastructure (no SaaS)
+- Extend it with your jurisdiction-specific professional standards and client integrations
+
 ## Prerequisites
 
 - Clojure 1.12+ (`clojure --version`)
