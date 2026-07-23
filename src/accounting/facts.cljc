@@ -67,7 +67,16 @@
           :required-evidence ["Prüfungsauftrag (engagement letter)"
                               "Unabhängigkeitserklärung (independence declaration)"
                               "Summen- und Saldenliste / Arbeitspapiere (trial balance / working papers)"
-                              "Wirtschaftsprüfer-Bestellungsurkunde (professional license/registration certificate)"]}})
+                              "Wirtschaftsprüfer-Bestellungsurkunde (professional license/registration certificate)"]}
+   "NLD" {:name "Netherlands"
+          :owner-authority "Autoriteit Financiële Markten (AFM) / Koninklijke Nederlandse Beroepsorganisatie van Accountants (NBA)"
+          :legal-basis "Wet toezicht accountantsorganisaties (Wta) art. 5 lid 1 (vergunningplicht: \"Het is verboden een wettelijke controle te verrichten zonder daartoe van de Autoriteit Financiële Markten een vergunning te hebben verkregen.\") en art. 19 lid 1 (onafhankelijkheid: \"Een accountantsorganisatie is onafhankelijk van de controlecliënt waarbij zij een wettelijke controle verricht en niet betrokken bij de besluitvorming van de controlecliënt ...\")"
+          :national-spec "Besluit toezicht accountantsorganisaties (Bta), Hoofdstuk 6 art. 27-31 (nadere regels onafhankelijkheid o.g.v. Wta art. 19 lid 4)"
+          :provenance "https://wetten.overheid.nl/BWBR0019468/ https://wetten.overheid.nl/BWBR0020184/ https://www.nba.nl/over-nba/register/"
+          :required-evidence ["Opdrachtbevestiging (engagement letter)"
+                              "Onafhankelijkheidsverklaring (independence declaration)"
+                              "Proef- en saldibalans / controledossier (trial balance / working papers)"
+                              "AFM-vergunning accountantsorganisatie / NBA-registratie externe accountant (audit firm AFM license / individual auditor NBA register entry, professional license/registration certificate)"]}})
 
 (defn spec-basis
   "The jurisdiction's requirement map, or nil -- nil means NO spec-basis,
