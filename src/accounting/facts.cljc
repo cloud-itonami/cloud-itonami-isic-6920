@@ -24,7 +24,23 @@
   Regulation S-X) is set at the national level in the US, even though
   individual CPA licensure itself is per-state -- this catalog cites
   the national standard-setters, the same posture every prior
-  federally-set-standards entry in this fleet takes.")
+  federally-set-standards entry in this fleet takes.
+
+  IRL's owner-authority (the Irish Auditing and Accounting Supervisory
+  Authority, IAASA) is verified from TWO independently-checked sources
+  rather than one, worth spelling out honestly: the substantive
+  independence citation (S.I. No. 312 of 2016, Regulation 64) defines
+  the enforcing body only by the generic term 'Supervisory Authority',
+  itself cross-referenced to 'the same meaning as in section 900 of
+  the Companies Act 2014' rather than naming IAASA directly in this
+  particular instrument's text; IAASA's own website independently
+  confirms its 'KEY STATUTORY FUNCTIONS' include overseeing the
+  Recognised Accountancy Bodies (RABs) and approving their standards
+  -- precisely the Supervisory-Authority role S.I. 312/2016 Regulation
+  65(2) describes. Connecting these two independently-verified facts
+  (rather than finding a single source stating the equation outright)
+  is the same honest-connection discipline this fleet's other multi-
+  source entries use.")
 
 (def catalog
   "iso3 -> requirement map. `:required-evidence` mirrors the generic
@@ -76,7 +92,16 @@
           :required-evidence ["Opdrachtbevestiging (engagement letter)"
                               "Onafhankelijkheidsverklaring (independence declaration)"
                               "Proef- en saldibalans / controledossier (trial balance / working papers)"
-                              "AFM-vergunning accountantsorganisatie / NBA-registratie externe accountant (audit firm AFM license / individual auditor NBA register entry, professional license/registration certificate)"]}})
+                              "AFM-vergunning accountantsorganisatie / NBA-registratie externe accountant (audit firm AFM license / individual auditor NBA register entry, professional license/registration certificate)"]}
+   "IRL" {:name "Ireland"
+          :owner-authority "Irish Auditing and Accounting Supervisory Authority (IAASA)"
+          :legal-basis "European Union (Statutory Audits) (Directive 2006/43/EC, as amended by Directive 2014/56/EU, and Regulation (EU) No 537/2014) Regulations 2016 (S.I. No. 312 of 2016), Regulation 64"
+          :national-spec "S.I. No. 312/2016 Regulation 64: 'Statutory auditors and audit firms are subject to the independence, objectivity and professional scepticism requirements of Articles 21(2), 22, 22a, 22b, 24, 24a, 24b, 25 and 25a of the Audit Directive as implemented in the State by Regulations 91 to 101 and 103.'"
+          :provenance "https://www.irishstatutebook.ie/eli/2016/si/312/made/en/print"
+          :required-evidence ["Engagement letter"
+                              "Independence declaration"
+                              "Trial balance / working papers"
+                              "Professional license/registration certificate"]}})
 
 (defn spec-basis
   "The jurisdiction's requirement map, or nil -- nil means NO spec-basis,
