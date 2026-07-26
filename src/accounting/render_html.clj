@@ -17,7 +17,8 @@
   over `langgraph.graph/run*`), a scenario builder (`run-demo!`), and a pure
   HTML renderer (`render`) reading only real fields off the `accounting.store`
   after the scenario actually ran."
-  (:require [clojure.string :as str]
+  (:require [jp-go-dds.skin]
+            [clojure.string :as str]
             [accounting.store :as store]
             [accounting.operation :as op]
             [langgraph.graph :as g]))
@@ -302,7 +303,9 @@ code { font-size: 12px; background: #f4f4f4; padding: 1px 4px; border-radius: 3p
        "<meta charset=\"utf-8\">\n"
        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
        "<title>cloud-itonami-isic-6920 &middot; accounting.render-html</title>\n"
-       "<style>\n" style-block "\n</style>\n"
+       "<style>"
+   (jp-go-dds.skin/dds+skin)
+   "</style>\n"
        "</head>\n<body>\n"
        "<header class=\"bar\">"
        "<h1>cloud-itonami-isic-6920 &middot; Audit Independence Governor operator console</h1>"
