@@ -18,7 +18,7 @@
   HTML renderer (`render`) reading only real fields off the `accounting.store`
   after the scenario actually ran."
   (:require [jp-go-dds.skin]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [accounting.store :as store]
             [accounting.operation :as op]
             [langgraph.graph :as g]))

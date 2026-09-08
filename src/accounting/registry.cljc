@@ -31,7 +31,7 @@
   submitting the filing itself (those are `accounting.operation`'s
   `:audit-opinion/issue` and `:tax-filing/submit`, always human-gated
   -- see README `Actuation`)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn- unsigned-certificate
   "Every certificate this actor produces is UNSIGNED -- signature is the
@@ -76,7 +76,7 @@
     (throw (ex-info "audit-opinion: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "audit-opinion: sequence must be >= 0" {})))
-  (let [opinion-number (str (str/upper-case jurisdiction) "-OPIN-" (zero-pad sequence 6))
+  (let [opinion-number (str (str/upper jurisdiction) "-OPIN-" (zero-pad sequence 6))
         record {"record_id" opinion-number
                 "kind" "audit-opinion-draft"
                 "engagement_id" engagement-id
@@ -98,7 +98,7 @@
     (throw (ex-info "tax-filing: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "tax-filing: sequence must be >= 0" {})))
-  (let [filing-number (str (str/upper-case jurisdiction) "-FILE-" (zero-pad sequence 6))
+  (let [filing-number (str (str/upper jurisdiction) "-FILE-" (zero-pad sequence 6))
         record {"record_id" filing-number
                 "kind" "tax-filing-draft"
                 "engagement_id" engagement-id
