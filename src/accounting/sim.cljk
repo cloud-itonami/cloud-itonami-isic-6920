@@ -1,5 +1,5 @@
 (ns accounting.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks a clean audit engagement
+  "Demo driver -- `kbb -M:dev:run`. Walks a clean audit engagement
   through intake -> jurisdiction professional-standards assessment ->
   independence screening -> audit-opinion-issuance proposal (always
   escalates) -> human approval -> commit, then a clean tax-filing

@@ -33,9 +33,9 @@ io.github.com-junkawasaki/langgraph-clj
   :dev {:override-deps
         {io.github.com-junkawasaki/langchain-clj
          {:local/root "../../kotoba-lang/langchain"}}}
-  ;; clojure -M:dev:run  -> drive the demo through one OperationActor
+  ;; kbb -M:dev:run  -> drive the demo through one OperationActor
   :run {:main-opts ["-m" "accounting.sim"]}
-  ;; clojure -M:dev:render-html -> regenerate docs/samples/operator-console.html
+  ;; kbb -M:dev:render-html -> regenerate docs/samples/operator-console.html
   ;; by actually running the actor (accounting.render-html), never hand-typed.
   :render-html {:main-opts ["-m" "accounting.render-html"]}
   :test {:extra-paths ["test"]
