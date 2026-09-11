@@ -67,7 +67,7 @@ layers enforce this (`accounting.governor`'s `:actuation/issue-
 opinion`/`:actuation/submit-filing` high-stakes gate and `accounting.
 phase`'s phase table, which never puts `:audit-opinion/issue`/`:tax-
 filing/submit` in any phase's `:auto` set) -- see `accounting.phase`'s
-docstring and `test/accounting/phase_test.clj`'s `audit-opinion-issue-
+docstring and `test/accounting/phase_test.cljk`'s `audit-opinion-issue-
 never-auto-at-any-phase`/`tax-filing-submit-never-auto-at-any-phase`.
 The actor may draft, check and recommend; a human accountant/auditor is
 always the one who actually issues an opinion or submits a filing.
@@ -151,15 +151,15 @@ lib to reference at all.
 
 | File | Role |
 |---|---|
-| `src/accounting/store.cljc` | **Store** protocol -- `MemStore` ‖ `DatomicStore` (`langchain.db`) + append-only audit ledger + audit-opinion/tax-filing history. No dynamically-filed sub-record -- both actuation ops act directly on a pre-seeded engagement, and double-issuance/double-filing guards check dedicated boolean facts rather than a `:status` value |
-| `src/accounting/registry.cljc` | Audit-opinion + tax-filing draft records, plus `trial-balance-difference` (a real, foundational bookkeeping identity -- see docstring for what it does not model) |
-| `src/accounting/facts.cljc` | Per-jurisdiction professional-standards/independence catalog with an official spec-basis citation per entry, honest coverage reporting |
-| `src/accounting/ledgerllm.cljc` | **Ledger-LLM Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/independence-screening/opinion-issuance/filing-submission proposals |
-| `src/accounting/corporate_intel.cljc` | optional cross-reference into [`cloud-itonami-isic-8291`](https://github.com/cloud-itonami/cloud-itonami-isic-8291)'s `:disclosure/query` company-profile lookup (ADR-2607110400) -- catches a client ENGAGEMENT'S COMPANY clean on the local `:independence-conflict?` field but sanctions-flagged in 8291's own sourced data; wired into `screen-independence` via an injected fn, default is a no-op so every prior caller's behavior is unchanged unless explicitly opted in |
-| `src/accounting/governor.cljc` | **Audit Independence Governor** -- 5 HARD checks (spec-basis · evidence-incomplete · wrong-engagement-type · independence-violation, unconditional evaluation · trial-balance-out-of-balance, pure ground-truth recompute) + double-issuance/double-filing guards + 1 soft (confidence/actuation gate) |
-| `src/accounting/phase.cljc` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (opinion/filing always human; engagement intake is the ONLY auto-eligible op, no capital risk) |
-| `src/accounting/operation.cljc` | **OperationActor** -- langgraph-clj StateGraph |
-| `src/accounting/sim.cljc` | demo driver |
+| `src/accounting/store.cljk` | **Store** protocol -- `MemStore` ‖ `DatomicStore` (`langchain.db`) + append-only audit ledger + audit-opinion/tax-filing history. No dynamically-filed sub-record -- both actuation ops act directly on a pre-seeded engagement, and double-issuance/double-filing guards check dedicated boolean facts rather than a `:status` value |
+| `src/accounting/registry.cljk` | Audit-opinion + tax-filing draft records, plus `trial-balance-difference` (a real, foundational bookkeeping identity -- see docstring for what it does not model) |
+| `src/accounting/facts.cljk` | Per-jurisdiction professional-standards/independence catalog with an official spec-basis citation per entry, honest coverage reporting |
+| `src/accounting/ledgerllm.cljk` | **Ledger-LLM Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/independence-screening/opinion-issuance/filing-submission proposals |
+| `src/accounting/corporate_intel.cljk` | optional cross-reference into [`cloud-itonami-isic-8291`](https://github.com/cloud-itonami/cloud-itonami-isic-8291)'s `:disclosure/query` company-profile lookup (ADR-2607110400) -- catches a client ENGAGEMENT'S COMPANY clean on the local `:independence-conflict?` field but sanctions-flagged in 8291's own sourced data; wired into `screen-independence` via an injected fn, default is a no-op so every prior caller's behavior is unchanged unless explicitly opted in |
+| `src/accounting/governor.cljk` | **Audit Independence Governor** -- 5 HARD checks (spec-basis · evidence-incomplete · wrong-engagement-type · independence-violation, unconditional evaluation · trial-balance-out-of-balance, pure ground-truth recompute) + double-issuance/double-filing guards + 1 soft (confidence/actuation gate) |
+| `src/accounting/phase.cljk` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (opinion/filing always human; engagement intake is the ONLY auto-eligible op, no capital risk) |
+| `src/accounting/operation.cljk` | **OperationActor** -- langgraph-clj StateGraph |
+| `src/accounting/sim.cljk` | demo driver |
 | `test/accounting/*_test.clj` | governor contract · phase invariants · store parity · registry conformance · facts coverage · corporate-intelligence integration |
 
 ## Business-process coverage (honest)

@@ -164,7 +164,7 @@ stack only, per the blueprint's own explicit statement.
   genuinely different domain (professional services, ISIC division
   69) for the first time.
 - (+) The actuation invariant (governor + phase, two layers) is
-  regression-tested by `test/accounting/phase_test.clj`'s `audit-
+  regression-tested by `test/accounting/phase_test.cljk`'s `audit-
   opinion-issue-never-auto-at-any-phase`/`tax-filing-submit-never-
   auto-at-any-phase`.
 - (+) `MemStore` ‖ `DatomicStore` parity is proven by `test/accounting/
@@ -175,7 +175,7 @@ stack only, per the blueprint's own explicit statement.
   balance-violations` extends the pure-ground-truth-recompute family to
   an equality-of-sums arithmetic shape.
 - (+) The NullPointerException bug (Decision 6) is now regression-
-  tested by `test/accounting/governor_contract_test.clj`'s
+  tested by `test/accounting/governor_contract_test.cljk`'s
   `wrong-engagement-type-for-opinion-is-held`/`wrong-engagement-type-
   for-filing-is-held`, and the lesson is generalized beyond this one
   build: guard type-specific-field recomputes on the type tag, in BOTH
