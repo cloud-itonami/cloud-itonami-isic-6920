@@ -30,7 +30,7 @@
   `:stake nil` since this actor's `:conflict`/`:incomplete` distinction
   is not itself a `high-stakes` kind here) and lands on
   `:low-confidence` -- see `corporate-intel-catches-the-hit-local-checks-miss`."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [langgraph.graph :as g]
             [accounting.store :as store]
             [accounting.operation :as op]

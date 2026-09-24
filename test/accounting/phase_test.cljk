@@ -2,7 +2,7 @@
   "The phase table as executable tests. The invariant this repo cannot
   regress on: `:audit-opinion/issue`/`:tax-filing/submit` must NEVER be
   a member of any phase's `:auto` set."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [accounting.phase :as phase]))
 
 (deftest audit-opinion-issue-never-auto-at-any-phase
