@@ -1,0 +1,34 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README "Robotics premise": a document-intake scanning robot digitizes
+;; physical receipts / ledgers (ISIC 6920, accounting, bookkeeping and
+;; auditing). Its physical work: carrying the client's receipt boxes from the
+;; drop-off counter to the scanning room, and lifting bound ledgers onto the
+;; book-scanner cradle.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-6920"
+ :cases
+ [{:id :receipt-boxes-to-scanning-room
+   :kind :transport
+   :procedure "intake robot carries a client's boxes of receipts from the drop-off counter to the scanning room"
+   :params {:mass-kg 40.0 :distance-m 35.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 0.8 :drive-force-n 70.0 :crr 0.02
+            :cog-height-m 0.45 :payload-cog-height-m 0.75 :support-half-length-m 0.22
+            :max-time-s 1800.0}
+   :sweep {:param :payload-kg :values [5.0 15.0 30.0 60.0 100.0]}
+   :quantity :cycle-time-s
+   :limit {:max 50.0 :basis "estimate: one drop-off-to-scanner leg per client visit inside the intake slot"}
+   :boundary {:lo 1.0 :hi 400.0}}
+  {:id :bound-ledger-to-scanner-cradle
+   :kind :manipulator
+   :procedure "arm lifts a bound ledger from the intake cart onto the V-cradle of the book scanner"
+   :params {:l1-m 0.45 :l2-m 0.40 :m1-kg 3.5 :m2-kg 2.5
+            :from [0.55 0.00] :to [0.35 0.45] :duration-s 2.0 :steps 500}
+   :sweep {:param :payload-kg :values [0.5 1.5 3.0 5.0 8.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 60.0 :basis "estimate: continuous shoulder torque of a light collaborative arm (~5 kg class)"}
+   :boundary {:lo 0.1 :hi 20.0}}]}
